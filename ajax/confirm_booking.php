@@ -55,7 +55,6 @@ if(isset($_POST['check_availability']))
       $result = json_encode(['status'=>$status]);
       echo $result;
       exit;
-
     }
 
     $count_days = date_diff($checkin_date,$checkout_date)->days;

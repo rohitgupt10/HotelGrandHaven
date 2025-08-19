@@ -38,7 +38,140 @@
 
 <h6 class="text-center bg-dark text-white p-3 m-0">Designed and Developed By Binay Gupta and Binayak Rijal</h6>
 
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<!-- Chatbot Floating Button and Popup -->
+<style>
+#chatbot-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  background: #343a40;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 28px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+#chatbot-popup {
+  display: none;
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  width: 320px;
+  max-width: 90vw;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  z-index: 10000;
+  flex-direction: column;
+  overflow: hidden;
+}
+#chatbot-header {
+  background: #343a40;
+  color: #fff;
+  padding: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+#chatbot-messages {
+  height: 260px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #f8f9fa;
+  font-size: 15px;
+}
+#chatbot-input-area {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+#chatbot-input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  font-size: 15px;
+  outline: none;
+}
+#chatbot-send {
+  background: #343a40;
+  color: #fff;
+  border: none;
+  padding: 0 18px;
+  cursor: pointer;
+  font-size: 16px;
+}
+</style>
+
+<button id="chatbot-btn" title="Chat with us">
+  💬
+</button>
+<div id="chatbot-popup">
+  <div id="chatbot-header">
+    Hotel Assistant
+    <span style="float:right;cursor:pointer;" onclick="toggleChatbot()">&times;</span>
+  </div>
+  <div id="chatbot-messages"></div>
+  <div id="chatbot-input-area">
+    <input type="text" id="chatbot-input" placeholder="Type your message..." autocomplete="off" />
+    <button id="chatbot-send">Send</button>
+  </div>
+</div>
+
+<script>
+function toggleChatbot() {
+  var popup = document.getElementById('chatbot-popup');
+  var messages = document.getElementById('chatbot-messages');
+  if (popup.style.display === 'block') {
+    // Closing: clear messages
+    messages.innerHTML = '';
+    popup.style.display = 'none';
+  } else {
+    // Opening: focus input
+    popup.style.display = 'block';
+    document.getElementById('chatbot-input').focus();
+  }
+}
+
+document.getElementById('chatbot-btn').onclick = toggleChatbot;
+
+document.getElementById('chatbot-send').onclick = sendChatbotMessage;
+document.getElementById('chatbot-input').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') sendChatbotMessage();
+});
+
+function appendMessage(sender, text) {
+  var msgDiv = document.createElement('div');
+  msgDiv.style.margin = '8px 0';
+  msgDiv.innerHTML = '<b>' + sender + ':</b> ' + text;
+  document.getElementById('chatbot-messages').appendChild(msgDiv);
+  document.getElementById('chatbot-messages').scrollTop = document.getElementById('chatbot-messages').scrollHeight;
+}
+
+function sendChatbotMessage() {
+  var input = document.getElementById('chatbot-input');
+  var msg = input.value.trim();
+  if (!msg) return;
+  appendMessage('You', msg);
+  input.value = '';
+  fetch('http://127.0.0.1:5000/query', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query: msg })
+  })
+  .then(response => response.json())
+  .then(data => {
+    appendMessage('Assistant', data.response);
+  })
+  .catch(() => {
+    appendMessage('Assistant', "Sorry, I couldn't connect to the server.");
+  });
+}
+</script>
 
 <script>
 

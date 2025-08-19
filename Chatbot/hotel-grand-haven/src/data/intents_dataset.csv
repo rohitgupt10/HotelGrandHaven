@@ -1,0 +1,113 @@
+intent,query
+Room_Availability,Do you have rooms available for next weekend?
+Room_Availability,Can you check if any rooms are free from 10th to 12th?
+Room_Availability,Is there availability for 2 adults and 1 child on the 25th?
+Room_Availability,Are there any rooms with a sea view available next month?
+Room_Availability,Do you have rooms with a balcony for this Saturday night?
+Room_Availability,Is there a room available for 4 adults this Friday?
+Room_Availability,Check availability for the upcoming holiday weekend.
+Room_Availability,Are there any rooms open tonight?
+Room_Availability,Please verify if a deluxe room is available 2nd to 5th.
+Room_Availability,Any family rooms available next week?
+
+Booking_Request,I would like to book a room for 2 adults next Friday.
+Booking_Request,Can I reserve a room for 3 nights?
+Booking_Request,I want to book a suite for my honeymoon.
+Booking_Request,I need a room for 1 adult on the 15th of this month.
+Booking_Request,Book a family room for 2 adults and 2 kids from 12th to 15th.
+Booking_Request,Please help me book a deluxe room for next weekend.
+Booking_Request,Reserve a standard room for tonight.
+Booking_Request,Make a reservation for 3 nights starting Monday.
+Booking_Request,Book a room with a balcony for two.
+Booking_Request,Can you place a booking for 4 nights in a suite?
+
+Facility_Query,What facilities do you have in your rooms?
+Facility_Query,Do your rooms have WiFi?
+Facility_Query,What amenities are included in the standard room?
+Facility_Query,Do you offer air conditioning in all rooms?
+Facility_Query,Is there a minibar in the rooms?
+Facility_Query,Do you have an on-site gym or pool?
+Facility_Query,Is room service available?
+Facility_Query,Do you provide toiletries and towels?
+Facility_Query,Are there tea and coffee makers in the room?
+Facility_Query,Do you have accessible rooms for wheelchair users?
+
+Cancellation,How can I cancel my booking?
+Cancellation,What is your cancellation policy?
+Cancellation,Can I get a refund if I cancel my booking?
+Cancellation,How do I change my reservation?
+Cancellation,Is there a fee for late cancellations?
+Cancellation,Can I cancel on the day of check-in?
+Cancellation,How long does a refund take after cancellation?
+Cancellation,Can I modify the dates instead of cancelling?
+Cancellation,What happens if I don’t show up?
+Cancellation,Is there a free cancellation window?
+
+Room_Count,How many rooms do you have?
+Room_Count,What is the total number of rooms?
+Room_Count,How many rooms are available in your hotel?
+Room_Count,How many suites do you have?
+Room_Count,How many family rooms are there?
+
+Pricing_Info,What is the price for a deluxe room?
+Pricing_Info,How much is a room per night?
+Pricing_Info,Do prices change on weekends?
+Pricing_Info,What are your rates next month?
+Pricing_Info,Is breakfast included in the price?
+
+Checkin_Time,What time is check-in?
+Checkout_Time,What time is check-out?
+Early_Checkin,Can I check in early?
+Late_Checkout,Can I check out late?
+
+Payment_Methods,What payment methods do you accept?
+Payment_Methods,Can I pay online?
+Payment_Methods,Do you take credit cards?
+Payment_Methods,Do you accept UPI or bank transfer?
+
+Modify_Booking,How can I change my booking dates?
+Modify_Booking,Can I update my reservation details?
+Modify_Booking,Can I change the guest name on my booking?
+
+Booking_Status,Can you check my booking status?
+Booking_Status,Is my reservation confirmed?
+Booking_Status,Has my booking been received?
+
+Refund_Policy,What is your refund policy?
+Refund_Policy,Do you offer full refunds?
+Refund_Policy,When will I receive my refund?
+
+Extra_Bed,Can you provide an extra bed?
+Extra_Bed,Is there a charge for an extra bed?
+Extra_Bed,Do you have baby cots available?
+
+Greeting,Hello
+Greeting,Hi
+Greeting,Hey
+Greeting,Hey there
+Greeting,Hi there
+Greeting,Good morning
+Greeting,Good afternoon
+Greeting,Good evening
+Greeting,Howdy
+Greeting,Greetings
+
+Goodbye,Bye
+Goodbye,Goodbye
+Goodbye,See you
+Goodbye,Talk to you later
+Goodbye,Catch you later
+Goodbye,See you soon
+Goodbye,Good night
+
+Thanks,Thanks
+Thanks,Thank you
+Thanks,Thanks a lot
+Thanks,Much appreciated
+Thanks,Appreciate it
+
+Help,Help
+Help,I need help
+Help,Can you help me?
+Help,Support
+Help,What can you do?

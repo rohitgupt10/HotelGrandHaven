@@ -20,9 +20,8 @@
     <h2 class="fw-bold h-font text-center">CONTACT US</h2>
      <div class="h-line bg-dark"></div>
      <p class="text-center mt-3">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-      Nobis minus quae reiciendis et <br> quia illum illo quas 
-      soluta beatae repudiandae?
+      If you have any questions, suggestions, or feedback, feel free to reach out to us.<br> 
+      We are here to assist you and ensure you have the best experience possible.
     </p>
   </div>
 

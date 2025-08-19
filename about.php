@@ -29,9 +29,8 @@
     <h2 class="fw-bold h-font text-center">ABOUT US</h2>
     <div class="h-line bg-dark"></div>
     <p class="text-center mt-3">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-      Nobis minus quae reiciendis et <br> quia illum illo quas 
-      soluta beatae repudiandae?
+      Room Booking is a platform that connects travelers with hotels and accommodations worldwide.<br>
+      Our mission is to simplify the booking process, ensuring a seamless experience for both guests and hosts
     </p>
   </div>
 
@@ -39,18 +38,16 @@
     <div class="row justify-content-between align-items-center">
       <div class="col-lg-6 col-md-5 mb-4 order-lg-1 order-md-1 order-2">
         <h3 class="mb-3">
-          Lorem ipsum dolor sit.
+          Our Story
         </h3>
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-          Cum eum dolore fugiat nam nemo saepe sint!
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-          Cum eum dolore fugiat nam nemo saepe sint!
+          Hotel Grand Haven was founded with the vision of making travel accessible and convenient for everyone. 
+          We believe that finding the perfect place to stay should be easy and enjoyable. Our platform offers a wide range of accommodations, from budget-friendly options to luxury stays, ensuring that every traveler can find their ideal room.
         </p>
       </div>
 
       <div class="col-lg-5 col-md-5 mb-4 order-lg-2 order-md-2 order-1">
-        <img src="images/about/binay.jpg" class="w-100">
+        <img src="images/about/partners.jpg" class="w-100">
       </div>
     </div>
   </div>

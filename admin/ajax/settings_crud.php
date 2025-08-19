@@ -118,4 +118,164 @@ if(isset($_POST['rem_member'])){
         echo 0;
     }
 }
+
+// Handle Chatbot API Settings Update
+if(isset($_POST['update_chatbot_settings'])) {
+    $api_key = $_POST['api_key'];
+    $model = $_POST['model'];
+    $max_tokens = $_POST['max_tokens'];
+    $temperature = $_POST['temperature'];
+    
+    // Update chatbot_config.php file
+    $config_path = UPLOAD_IMAGE_PATH.'../inc/chatbot_config.php';
+    $config_content = '<?php
+// This file contains configuration settings for the chatbot
+
+// OpenAI API Key - Replace with your actual API key
+define(\'OPENAI_API_KEY\', \''.$api_key.'\');
+
+// OpenAI Model Configuration
+define(\'OPENAI_MODEL\', \''.$model.'\'); // You can upgrade to gpt-4 if needed
+
+// Maximum token count for responses
+define(\'MAX_TOKENS\', '.$max_tokens.');
+
+// Temperature setting (0.0 to 1.0) - lower is more deterministic, higher is more creative
+define(\'TEMPERATURE\', '.$temperature.');
+
+// Chatbot personality settings
+$chatbot_settings = [
+    \'name\' => \''.$GLOBALS['chatbot_settings']['name'].'\',
+    \'personality\' => \''.$GLOBALS['chatbot_settings']['personality'].'\',
+    \'response_style\' => \''.$GLOBALS['chatbot_settings']['response_style'].'\'
+];
+?>';
+    
+    if(file_put_contents($config_path, $config_content)) {
+        echo 1;
+    } else {
+        echo 0;
+    }
+}
+
+// Handle Personality Settings Update
+if(isset($_POST['update_personality_settings'])) {
+    $name = $_POST['name'];
+    $personality = $_POST['personality'];
+    $response_style = $_POST['response_style'];
+    
+    // Update chatbot_config.php file
+    $config_path = UPLOAD_IMAGE_PATH.'../inc/chatbot_config.php';
+    
+    // First read the current file to get other settings
+    require(UPLOAD_IMAGE_PATH.'../inc/chatbot_config.php');
+    
+    $config_content = '<?php
+// This file contains configuration settings for the chatbot
+
+// OpenAI API Key - Replace with your actual API key
+define(\'OPENAI_API_KEY\', \''.OPENAI_API_KEY.'\');
+
+// OpenAI Model Configuration
+define(\'OPENAI_MODEL\', \''.OPENAI_MODEL.'\'); // You can upgrade to gpt-4 if needed
+
+// Maximum token count for responses
+define(\'MAX_TOKENS\', '.MAX_TOKENS.');
+
+// Temperature setting (0.0 to 1.0) - lower is more deterministic, higher is more creative
+define(\'TEMPERATURE\', '.TEMPERATURE.');
+
+// Chatbot personality settings
+$chatbot_settings = [
+    \'name\' => \''.$name.'\',
+    \'personality\' => \''.$personality.'\',
+    \'response_style\' => \''.$response_style.'\'
+];
+?>';
+    
+    if(file_put_contents($config_path, $config_content)) {
+        echo 1;
+    } else {
+        echo 0;
+    }
+}
+
+// Create chat_logs table if it doesn't exist
+if(isset($_POST['get_chat_logs'])) {
+    // Check if table exists, if not create it
+    $table_query = "CREATE TABLE IF NOT EXISTS `chat_logs` (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `user_id` int(11) DEFAULT NULL,
+        `user_query` text NOT NULL,
+        `bot_response` text NOT NULL,
+        `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+        PRIMARY KEY (`id`)
+    )";
+    
+    if(mysqli_query($con, $table_query)) {
+        // Fetch recent chat logs
+        $q = "SELECT c.*, u.name as user_name 
+              FROM `chat_logs` c
+              LEFT JOIN `user_cred` u ON c.user_id = u.id
+              ORDER BY c.timestamp DESC LIMIT 20";
+        
+        $res = mysqli_query($con, $q);
+        
+        if(mysqli_num_rows($res) == 0) {
+            echo '<table class="table table-hover border">
+                <thead>
+                    <tr class="bg-dark text-light">
+                        <th scope="col">#</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Query</th>
+                        <th scope="col">Response</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5" class="text-center">No chat logs available</td>
+                    </tr>
+                </tbody>
+            </table>';
+        } else {
+            $table = '<table class="table table-hover border">
+                <thead>
+                    <tr class="bg-dark text-light">
+                        <th scope="col">#</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Query</th>
+                        <th scope="col">Response</th>
+                        <th scope="col">Time</th>
+                    </tr>
+                </thead>
+                <tbody>';
+            
+            $i = 1;
+            while($row = mysqli_fetch_assoc($res)) {
+                $user_name = $row['user_name'] ? $row['user_name'] : 'Guest';
+                
+                // Truncate long texts
+                $query = strlen($row['user_query']) > 50 ? substr($row['user_query'], 0, 50).'...' : $row['user_query'];
+                $response = strlen($row['bot_response']) > 50 ? substr($row['bot_response'], 0, 50).'...' : $row['bot_response'];
+                
+                $table .= "
+                <tr>
+                    <td>$i</td>
+                    <td>$user_name</td>
+                    <td>$query</td>
+                    <td>$response</td>
+                    <td>".date('d-m-Y H:i:s', strtotime($row['timestamp']))."</td>
+                </tr>
+                ";
+                $i++;
+            }
+            
+            $table .= '</tbody></table>';
+            echo $table;
+        }
+    } else {
+        echo 'Error loading chat logs!';
+    }
+}
 ?>
